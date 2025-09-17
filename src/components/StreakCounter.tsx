@@ -3,11 +3,15 @@ import { Card, CardContent } from "@/components/ui/card";
 
 interface StreakCounterProps {
   streak: number;
+  onClick?: () => void;
 }
 
-export const StreakCounter = ({ streak }: StreakCounterProps) => {
+export const StreakCounter = ({ streak, onClick }: StreakCounterProps) => {
   return (
-    <Card className="hover:shadow-md transition-all duration-300 hover:scale-105 bg-gradient-to-br from-orange-50 to-red-50 border-orange-200">
+    <Card 
+      className={`hover:shadow-md transition-all duration-300 hover:scale-105 bg-gradient-to-br from-orange-50 to-red-50 border-orange-200 ${onClick ? 'cursor-pointer' : ''}`}
+      onClick={onClick}
+    >
       <CardContent className="p-6">
         <div className="flex items-center justify-between">
           <div>

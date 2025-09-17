@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Leaf, Award, Zap, Globe, Target, BookOpen, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -11,6 +12,7 @@ import { AchievementBadge } from "@/components/AchievementBadge";
 import { StreakCounter } from "@/components/StreakCounter";
 
 const Index = () => {
+  const navigate = useNavigate();
   const [currentStreak, setCurrentStreak] = useState(7);
   const [totalXP, setTotalXP] = useState(1250);
 
@@ -89,6 +91,7 @@ const Index = () => {
               <Button 
                 size="lg" 
                 className="bg-white text-nature-primary hover:bg-white/90 font-semibold px-8 py-4 text-lg animate-bounce-gentle"
+                onClick={() => navigate("/lessons/1")}
               >
                 Start Learning <Leaf className="ml-2 h-5 w-5" />
               </Button>
@@ -113,12 +116,13 @@ const Index = () => {
               icon={BookOpen}
               color="text-accent"
             />
-            <StreakCounter streak={currentStreak} />
+            <StreakCounter streak={currentStreak} onClick={() => navigate("/profile")} />
             <ProgressStats 
               title="Achievements" 
               value={`${achievements.filter(a => a.earned).length}/${achievements.length}`}
               icon={Award}
               color="text-warning"
+              onClick={() => navigate("/achievements")}
             />
           </div>
         </div>
@@ -139,7 +143,7 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
             {lessonCategories.map((category, index) => (
               <div key={category.id} className="animate-slide-up" style={{ animationDelay: `${index * 150}ms` }}>
-                <LessonCard {...category} />
+                <LessonCard {...category} onStartLearning={() => navigate(`/lessons/${category.id}`)} />
               </div>
             ))}
           </div>
@@ -161,7 +165,7 @@ const Index = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {achievements.map((achievement, index) => (
               <div key={achievement.id} className="animate-scale-in" style={{ animationDelay: `${index * 100}ms` }}>
-                <AchievementBadge {...achievement} />
+                <AchievementBadge {...achievement} onClick={() => navigate("/achievements")} />
               </div>
             ))}
           </div>
@@ -180,6 +184,7 @@ const Index = () => {
           <Button 
             size="lg" 
             className="bg-white text-nature-primary hover:bg-white/90 font-semibold px-8 py-4 text-lg"
+            onClick={() => navigate("/lessons/1")}
           >
             Continue Learning <Globe className="ml-2 h-5 w-5" />
           </Button>

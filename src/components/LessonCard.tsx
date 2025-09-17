@@ -15,6 +15,7 @@ interface LessonCardProps {
   totalLessons: number;
   difficulty: string;
   color: string;
+  onStartLearning?: () => void;
 }
 
 export const LessonCard = ({
@@ -26,6 +27,7 @@ export const LessonCard = ({
   totalLessons,
   difficulty,
   color,
+  onStartLearning,
 }: LessonCardProps) => {
   const isLocked = progress === 0 && lessonsCompleted === 0;
   
@@ -72,6 +74,7 @@ export const LessonCard = ({
           className="w-full" 
           variant={isLocked ? "secondary" : "default"}
           disabled={isLocked}
+          onClick={onStartLearning}
         >
           {isLocked ? (
             <>

@@ -8,15 +8,18 @@ interface AchievementBadgeProps {
   description: string;
   icon: LucideIcon;
   earned: boolean;
+  onClick?: () => void;
 }
 
-export const AchievementBadge = ({ name, description, icon: Icon, earned }: AchievementBadgeProps) => {
+export const AchievementBadge = ({ name, description, icon: Icon, earned, onClick }: AchievementBadgeProps) => {
   return (
-    <Card className={`group transition-all duration-300 hover:scale-105 ${
+    <Card className={`group transition-all duration-300 hover:scale-105 ${onClick ? 'cursor-pointer' : ''} ${
       earned 
         ? 'bg-gradient-to-br from-success/10 to-leaf/10 border-success/30 hover:shadow-lg shadow-success/20' 
         : 'bg-muted/50 opacity-60'
-    }`}>
+    }`}
+    onClick={onClick}
+    >
       <CardContent className="p-6 text-center space-y-4">
         <div className={`mx-auto w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300 ${
           earned 

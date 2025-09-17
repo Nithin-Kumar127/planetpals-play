@@ -6,11 +6,15 @@ interface ProgressStatsProps {
   value: string;
   icon: LucideIcon;
   color: string;
+  onClick?: () => void;
 }
 
-export const ProgressStats = ({ title, value, icon: Icon, color }: ProgressStatsProps) => {
+export const ProgressStats = ({ title, value, icon: Icon, color, onClick }: ProgressStatsProps) => {
   return (
-    <Card className="hover:shadow-md transition-all duration-300 hover:scale-105">
+    <Card 
+      className={`hover:shadow-md transition-all duration-300 hover:scale-105 ${onClick ? 'cursor-pointer' : ''}`}
+      onClick={onClick}
+    >
       <CardContent className="p-6">
         <div className="flex items-center justify-between">
           <div>
